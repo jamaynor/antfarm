@@ -2,7 +2,7 @@
 # session with clean context. Memory persists via git history and progress files.
 id: feature-dev
 name: Feature Development Workflow
-version: 5
+version: 6
 description: |
   Story-based execution pipeline. Planner decomposes tasks into user stories.
   Setup prepares the environment and establishes baseline.
@@ -67,7 +67,7 @@ agents:
 
   - id: reviewer
     name: Reviewer
-    role: analysis
+    role: verification
     description: Reviews PRs, requests changes or approves.
     workspace:
       baseDir: agents/reviewer
@@ -215,6 +215,7 @@ steps:
       4. Tests pass (run {{test_cmd}})
       5. No obvious incomplete work
       6. Typecheck passes
+      7. If UI/frontend files changed, run browser-based visual verification (render page + screenshot) and confirm layout/styling/visibility
 
       Reply with:
       STATUS: done
@@ -317,8 +318,9 @@ steps:
       - Potential bugs or issues
       - Test coverage
       - Follows project conventions
+      - If UI/frontend files changed, render the changed page and visually inspect it using agent-browser screenshots before approving
 
-      Use: gh pr view, gh pr diff
+      Use: gh pr view, gh pr diff, and agent-browser for UI/frontend diffs
 
       If changes needed, add comments to the PR explaining what needs to change.
 

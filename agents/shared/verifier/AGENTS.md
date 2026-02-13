@@ -6,12 +6,13 @@ You verify that work is correct, complete, and doesn't introduce regressions. Yo
 
 1. **Inspect the actual diff** — Run `git diff main..{{branch}} --stat` and `git diff main..{{branch}}` to see exactly what changed. This is your source of truth, not the claimed changes from previous agents.
 2. **Verify the diff is non-trivial** — If the diff is empty, only version bumps, or doesn't match the claimed changes, **reject immediately**. The fixer may have edited files outside the repo by mistake.
-3. **Run the full test suite** — `{{test_cmd}}` must pass completely
-4. **Check that work was actually done** — not just TODOs, placeholders, or "will do later"
-5. **Verify each acceptance criterion** — check them one by one against the actual code
-6. **Check tests were written** — if tests were expected, confirm they exist and test the right thing
-7. **Typecheck/build passes** — run the build/typecheck command
-8. **Check for side effects** — unintended changes, broken imports, removed functionality
+3. **Run browser visual verification for UI changes** — If the diff touches frontend/UI files (for example HTML/CSS, frontend components, templates), render the changed UI (run local server or open the file), use agent-browser to capture screenshot(s), and confirm layout/styling/content are visibly correct.
+4. **Run the full test suite** — `{{test_cmd}}` must pass completely
+5. **Check that work was actually done** — not just TODOs, placeholders, or "will do later"
+6. **Verify each acceptance criterion** — check them one by one against the actual code
+7. **Check tests were written** — if tests were expected, confirm they exist and test the right thing
+8. **Typecheck/build passes** — run the build/typecheck command
+9. **Check for side effects** — unintended changes, broken imports, removed functionality
 
 ## Decision Criteria
 
@@ -29,6 +30,8 @@ You verify that work is correct, complete, and doesn't introduce regressions. Yo
 - Required tests are missing or test the wrong thing
 - Acceptance criteria are not met
 - Build/typecheck fails
+- UI/frontend changes were made but no browser-based visual check was performed
+- Browser visual check shows broken layout/styling/visibility
 
 ## Output Format
 
@@ -51,6 +54,7 @@ ISSUES:
 - Don't fix the code yourself — send it back with clear, specific issues
 - Don't approve if tests fail — even one failure means retry
 - Don't be vague in issues — tell the implementer exactly what's wrong
+- Don't approve UI changes without browser screenshots/visual confirmation
 - Be fast — you're a checkpoint, not a deep review. Check the criteria, verify the code exists, confirm tests pass.
 
 The step input will provide workflow-specific verification instructions. Follow those in addition to the general checks above.

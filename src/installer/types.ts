@@ -7,9 +7,9 @@ export type WorkflowAgentFiles = {
 /**
  * Agent roles control tool access during install.
  *
- * - analysis:      Read-only code exploration (planner, prioritizer, reviewer, investigator, triager)
+ * - analysis:      Read-only code exploration (planner, prioritizer, investigator, triager)
  * - coding:        Full read/write/exec for implementation (developer, fixer, setup)
- * - verification:  Read + exec but NO write — independent verification integrity (verifier)
+ * - verification:  Read + exec + browser but NO write — independent verification integrity (verifier, reviewer)
  * - testing:       Read + exec + browser/web for E2E testing, NO write (tester)
  * - pr:            Read + exec only — just runs `gh pr create` (pr)
  * - scanning:      Read + exec + web search for CVE lookups, NO write (scanner)

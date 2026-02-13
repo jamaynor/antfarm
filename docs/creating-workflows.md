@@ -123,9 +123,9 @@ Roles control what tools each agent has access to during execution:
 
 | Role | Access | Typical agents |
 |------|--------|----------------|
-| `analysis` | Read-only code exploration | planner, prioritizer, reviewer, investigator, triager |
+| `analysis` | Read-only code exploration | planner, prioritizer, investigator, triager |
 | `coding` | Full read/write/exec for implementation | developer, fixer, setup |
-| `verification` | Read + exec but NO write — preserves verification integrity | verifier |
+| `verification` | Read + exec + browser but NO write — preserves verification integrity | verifier, reviewer |
 | `testing` | Read + exec + browser/web for E2E testing, NO write | tester |
 | `pr` | Read + exec only — runs `gh pr create` | pr |
 | `scanning` | Read + exec + web search for CVE lookups, NO write | scanner |
@@ -337,5 +337,5 @@ This provisions agent workspaces, registers agents in OpenClaw config, and sets 
 - **Include output format in every step.** Agents need to know exactly what KEY: value pairs to return.
 - **Use verification steps.** A verify -> retry loop catches most quality issues automatically.
 - **Keep agents focused.** One agent, one job. Don't combine triaging and fixing in the same agent.
-- **Set appropriate roles.** Use `analysis` for read-only agents and `verification` for verifiers to prevent them from modifying code they're reviewing.
+- **Set appropriate roles.** Use `analysis` for read-only exploration agents and `verification` for verifiers/reviewers so they can validate code (and UI rendering) without modifying files.
 - **Test with small tasks first.** Run a simple test task before throwing a complex feature at the pipeline.

@@ -94,14 +94,14 @@ const ROLE_POLICIES: Record<AgentRole, { profile?: string; alsoAllow?: string[];
     timeoutSeconds: TIMEOUT_30_MIN,  // implements code + build + tests
   },
 
-  // verification: read + exec but NO write — preserves independent verification integrity
+  // verification: read + exec + browser but NO write — supports independent UI visual verification
   verification: {
     profile: "coding",
+    alsoAllow: ["browser"],
     deny: [
       ...ALWAYS_DENY,
       "write", "edit", "apply_patch",  // cannot modify code it's verifying
       "image", "tts",                  // unnecessary
-      "group:ui",                      // no browser/canvas
     ],
     timeoutSeconds: TIMEOUT_20_MIN,  // code review + runs tests
   },
@@ -160,9 +160,9 @@ const SUBAGENT_POLICY = { allowAgents: [] as string[] };
  */
 function inferRole(agentId: string): AgentRole {
   const id = agentId.toLowerCase();
-  if (id.includes("planner") || id.includes("prioritizer") || id.includes("reviewer")
+  if (id.includes("planner") || id.includes("prioritizer")
       || id.includes("investigator") || id.includes("triager")) return "analysis";
-  if (id.includes("verifier")) return "verification";
+  if (id.includes("verifier") || id.includes("reviewer")) return "verification";
   if (id.includes("tester")) return "testing";
   if (id.includes("scanner")) return "scanning";
   if (id === "pr" || id.includes("/pr")) return "pr";
