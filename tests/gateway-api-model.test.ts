@@ -6,11 +6,11 @@ import assert from "node:assert/strict";
 // Since actual HTTP/CLI calls require a running gateway, we mock fetch.
 
 describe("gateway-api model parameter support", () => {
-  let createAgentCronJob: typeof import("../src/installer/gateway-api.js").createAgentCronJob;
+  let createAgentCronJob: typeof import("../dist/installer/gateway-api.js").createAgentCronJob;
 
   beforeEach(async () => {
     // Re-import to get fresh module
-    const mod = await import("../src/installer/gateway-api.js");
+    const mod = await import("../dist/installer/gateway-api.js");
     createAgentCronJob = mod.createAgentCronJob;
   });
 
