@@ -88,7 +88,7 @@ The workflow cannot advance until you report. Your session ending without report
 }
 
 export function buildPollingPrompt(workflowId: string, agentId: string): string {
-  const fullAgentId = `${workflowId}/${agentId}`;
+  const fullAgentId = `${workflowId}-${agentId}`;
   const cli = resolveAntfarmCli();
 
   return `Check for pending work. Run this command:
@@ -107,7 +107,7 @@ export async function setupAgentCrons(workflow: WorkflowSpec): Promise<void> {
     const agent = agents[i];
     const anchorMs = i * 60_000; // stagger by 1 minute each
     const cronName = `antfarm/${workflow.id}/${agent.id}`;
-    const agentId = `${workflow.id}/${agent.id}`;
+    const agentId = `${workflow.id}-${agent.id}`;
     const prompt = buildAgentPrompt(workflow.id, agent.id);
     const timeoutSeconds = agent.timeoutSeconds ?? DEFAULT_AGENT_TIMEOUT_SECONDS;
 

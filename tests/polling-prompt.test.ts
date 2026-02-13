@@ -5,7 +5,7 @@ import { buildPollingPrompt } from "../src/installer/agent-cron.js";
 describe("buildPollingPrompt", () => {
   it("contains the step claim command with correct agent id", () => {
     const prompt = buildPollingPrompt("feature-dev", "developer");
-    assert.ok(prompt.includes('step claim "feature-dev/developer"'));
+    assert.ok(prompt.includes('step claim "feature-dev-developer"'));
   });
 
   it("instructs to reply HEARTBEAT_OK on NO_WORK", () => {
@@ -29,6 +29,6 @@ describe("buildPollingPrompt", () => {
 
   it("works with different workflow/agent ids", () => {
     const prompt = buildPollingPrompt("bug-fix", "fixer");
-    assert.ok(prompt.includes('step claim "bug-fix/fixer"'));
+    assert.ok(prompt.includes('step claim "bug-fix-fixer"'));
   });
 });
