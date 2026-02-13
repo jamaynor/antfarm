@@ -71,3 +71,12 @@ Started: 2026-02-11 05:47 ET
 - Created tests/work-prompt.test.ts with 6 tests: complete instructions, fail instructions, no claim, critical warning, no HEARTBEAT_OK/NO_WORK, different ids
 - All tests pass, build passes, typecheck passes
 - Files changed: src/installer/agent-cron.ts (modified), tests/work-prompt.test.ts (new)
+
+## 2026-02-13 04:52 - 9-gateway-api-model-support: Add model parameter support to createAgentCronJob
+- createAgentCronJob already had model? in payload type + delivery? field (added in stories 4+)
+- Fixed merge conflict artifacts (leftover commit message text on delivery lines)
+- Created tests/gateway-api-model.test.ts with 5 tests: model in payload, backward compat, HTTP body, CLI fallback, delivery+model together
+- Tests mock globalThis.fetch to verify model passes through HTTP path
+- All 105 tests pass, build passes, typecheck passes
+- Files changed: src/installer/gateway-api.ts (cleanup), tests/gateway-api-model.test.ts (new, committed in prior fix)
+- **Learnings:** Merge conflict resolution can leave artifacts beyond standard markers; always grep for commit message text in source
