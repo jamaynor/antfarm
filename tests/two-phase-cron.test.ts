@@ -35,9 +35,9 @@ describe("two-phase-cron-setup", () => {
       assert.ok(prompt.includes("HEARTBEAT_OK"));
     });
 
-    it("remains under 2000 chars (minimal)", () => {
+    it("remains under 5000 chars (includes embedded work prompt)", () => {
       const prompt = buildPollingPrompt("feature-dev", "developer");
-      assert.ok(prompt.length < 2000, `Prompt too long: ${prompt.length} chars`);
+      assert.ok(prompt.length < 5000, `Prompt too long: ${prompt.length} chars`);
     });
   });
 

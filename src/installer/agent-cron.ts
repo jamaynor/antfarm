@@ -94,16 +94,26 @@ export function buildPollingPrompt(workflowId: string, agentId: string, workMode
   const fullAgentId = `${workflowId}-${agentId}`;
   const cli = resolveAntfarmCli();
   const model = workModel ?? "claude-opus-4-6";
+  const workPrompt = buildWorkPrompt(workflowId, agentId);
 
-  return `Check for pending work. Run this command:
+  return `Check for pending work. Run:
 \`\`\`
 node ${cli} step claim "${fullAgentId}"
 \`\`\`
-If the output is "NO_WORK", reply HEARTBEAT_OK and stop.
-If JSON is returned, use sessions_spawn to execute the work with the full model:
-- task: Include the full work prompt followed by the claimed step JSON
+If output is "NO_WORK", reply HEARTBEAT_OK and stop.
+
+If JSON is returned, parse it to extract stepId, runId, and input fields.
+Then call sessions_spawn with these parameters:
+- agentId: "${fullAgentId}"
 - model: "${model}"
-Then reply with a short summary of what you spawned.`;
+- task: The full work prompt below, followed by "\\n\\nCLAIMED STEP JSON:\\n" and the exact JSON output from step claim.
+
+Full work prompt to include in the spawned task:
+---START WORK PROMPT---
+${workPrompt}
+---END WORK PROMPT---
+
+Reply with a short summary of what you spawned.`;
 }
 
 export async function setupAgentCrons(workflow: WorkflowSpec): Promise<void> {
