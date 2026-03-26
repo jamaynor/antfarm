@@ -1,3 +1,17 @@
+// Responsibility: Control dashboard daemon lifecycle (pid/log paths, start, stop, and status checks).
+// Exported interface (ASCII):
+// getPidFile()
+// └─ returns dashboard PID file path
+// getLogFile()
+// └─ returns dashboard log file path
+// isRunning()
+// └─ checks PID liveness and clears stale PID files
+// startDaemon(port?)
+// └─ spawns detached daemon process and verifies startup
+// stopDaemon()
+// └─ sends SIGTERM and removes PID file
+// getDaemonStatus()
+// └─ returns dashboard running state (+pid when running)
 import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";

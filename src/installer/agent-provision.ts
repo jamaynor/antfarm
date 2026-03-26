@@ -1,3 +1,10 @@
+// Responsibility: Provision workflow agents by creating workspaces, copying bootstrap files, and installing bundled/external skills.
+// Exported interface (ASCII):
+// ProvisionedAgent (type)
+// └─ shape of provisioned agent record (ids, workspaceDir, agentDir, model/timeout)
+// provisionAgents(params)
+// ├─ creates agent workspaces and copies declared files
+// └─ installs bundled/external skills and returns ProvisionedAgent[]
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { WorkflowAgent, WorkflowSpec } from "./types.js";

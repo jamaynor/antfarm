@@ -1,3 +1,9 @@
+// Responsibility: Upsert/remove Antfarm guidance blocks in the main agent's TOOLS.md and AGENTS.md files.
+// Exported interface (ASCII):
+// updateMainAgentGuidance()
+// └─ reads OpenClaw config to locate workspace and upserts guidance blocks
+// removeMainAgentGuidance()
+// └─ removes previously inserted Antfarm guidance blocks
 import fs from "node:fs/promises";
 import path from "node:path";
 import { readOpenClawConfig } from "./openclaw-config.js";

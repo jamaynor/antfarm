@@ -1,3 +1,13 @@
+// Responsibility: Persist and retrieve workflow events (JSONL log) and fire optional webhooks for run notifications.
+// Exported interface (ASCII):
+// EventType (type)
+// AntfarmEvent (interface)
+// emitEvent(evt)
+// └─ appends to events log and triggers webhook if configured
+// getRecentEvents(limit?)
+// └─ returns latest events from events.jsonl
+// getRunEvents(runId, limit?)
+// └─ returns events matching a run id or prefix
 import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";

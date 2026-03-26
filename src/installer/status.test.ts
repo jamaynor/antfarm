@@ -1,3 +1,6 @@
+// Responsibility: Test workflow status helpers, especially stopWorkflow cancellation paths.
+// Exported interface (ASCII):
+// (none — test file)
 import { describe, it, afterEach } from "node:test";
 import assert from "node:assert/strict";
 import crypto from "node:crypto";

@@ -1,3 +1,13 @@
+// Responsibility: Uninstall one or all workflows by removing config, crons, agent workspaces/directories, run records, and Antfarm runtime artifacts.
+// Exported interface (ASCII):
+// selectAntfarmManagedAgents(list, workflowIds, workflowWorkspaceRoot?)
+// └─ identifies Antfarm-managed agent entries in OpenClaw config
+// checkActiveRuns(workflowId?)
+// └─ returns currently running runs (optionally filtered by workflow)
+// uninstallWorkflow({ workflowId, removeGuidance? })
+// └─ removes one workflow's config/assets/state and agent crons
+// uninstallAllWorkflows()
+// └─ performs full Antfarm teardown across workflows, config, DB, crons, logs, and symlink
 import fs from "node:fs/promises";
 import path from "node:path";
 import { execSync } from "node:child_process";

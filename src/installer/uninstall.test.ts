@@ -1,3 +1,6 @@
+// Responsibility: Test uninstall agent-selection logic so only Antfarm-managed agents are targeted for removal.
+// Exported interface (ASCII):
+// (none — test file)
 import assert from "node:assert/strict";
 import path from "node:path";
 import { describe, it } from "node:test";

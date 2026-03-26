@@ -1,3 +1,9 @@
+// Responsibility: Write workflow bootstrap files into agent workspaces with create/skip/update semantics.
+// Exported interface (ASCII):
+// WorkflowFileWriteResult (type)
+// └─ result shape for write operation status
+// writeWorkflowFile({ destination, source, overwrite })
+// └─ copies source file to destination and reports created/skipped/updated
 import fs from "node:fs/promises";
 import path from "node:path";
 

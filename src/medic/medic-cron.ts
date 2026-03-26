@@ -1,3 +1,11 @@
+// Responsibility: Manage installation/removal/detection of the periodic Medic cron job and its supporting medic agent config.
+// Exported interface (ASCII):
+// installMedicCron()
+// └─ ensures medic agent exists and creates antfarm/medic cron
+// uninstallMedicCron()
+// └─ removes medic cron and medic agent entry
+// isMedicCronInstalled()
+// └─ returns true when antfarm/medic cron exists
 /**
  * Medic cron management — install/uninstall the medic's periodic check cron job.
  */

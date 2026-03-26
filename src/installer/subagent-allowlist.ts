@@ -1,3 +1,9 @@
+// Responsibility: Manage agent-to-agent allowlist settings in OpenClaw config for subagent messaging.
+// Exported interface (ASCII):
+// addSubagentAllowlist(config, agentIds)
+// └─ ensures agentToAgent exists and merges allowed agent IDs
+// removeSubagentAllowlist(config, agentIds)
+// └─ removes specific agent IDs (no-op if allow is wildcard)
 type AgentToAgentConfig = {
   enabled?: boolean;
   allow?: string[];

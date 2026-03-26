@@ -95,18 +95,20 @@ steps:
 
       Instructions:
       1. Explore the codebase to understand the stack, conventions, and patterns
-      2. Break the task into small user stories (max 20)
-      3. Order by dependency: schema/DB first, backend, frontend, integration
-      4. Each story must fit in one developer session (one context window)
-      5. Every acceptance criterion must be mechanically verifiable
-      6. Always include "Typecheck passes" as the last criterion in every story
-      7. Every story MUST include test criteria — "Tests for [feature] pass"
-      8. The developer is expected to write tests as part of each story
+      2. Detect the project's tech stack (languages, frameworks, runtimes)
+      3. Break the task into small user stories (max 20)
+      4. Order by dependency: schema/DB first, backend, frontend, integration
+      5. Each story must fit in one developer session (one context window)
+      6. Every acceptance criterion must be mechanically verifiable
+      7. Always include "Typecheck passes" as the last criterion in every story
+      8. Every story MUST include test criteria — "Tests for [feature] pass"
+      9. The developer is expected to write tests as part of each story
 
       Reply with:
       STATUS: done
       REPO: /path/to/repo
       BRANCH: feature-branch-name
+      TECH_STACK: comma-separated tags (e.g., typescript, react, node)
       STORIES_JSON: [ ... array of story objects ... ]
     expects: "STATUS: done"
     max_retries: 2
@@ -164,6 +166,9 @@ steps:
       BUILD_CMD: {{build_cmd}}
       TEST_CMD: {{test_cmd}}
 
+      CODING STANDARDS (follow these when writing code):
+      {{coding_standards}}
+
       CURRENT STORY:
       {{current_story}}
 
@@ -210,6 +215,9 @@ steps:
       BRANCH: {{branch}}
       CHANGES: {{changes}}
       TEST_CMD: {{test_cmd}}
+
+      CODING STANDARDS (verify the code follows these):
+      {{coding_standards}}
 
       CURRENT STORY:
       {{current_story}}
@@ -336,6 +344,9 @@ steps:
       PR: {{pr}}
       TASK: {{task}}
       CHANGES: {{changes}}
+
+      CODING STANDARDS (evaluate the PR against these):
+      {{coding_standards}}
 
       PROGRESS LOG:
       {{progress}}

@@ -1,3 +1,23 @@
+// Responsibility: Centralize filesystem path resolution for bundled workflows, OpenClaw state, workspaces, runs, and the CLI binary.
+// Exported interface (ASCII):
+// resolveBundledWorkflowsDir()
+// └─ absolute path to bundled workflows directory
+// resolveBundledWorkflowDir(workflowId)
+// └─ bundled workflow subdirectory
+// resolveOpenClawStateDir()
+// └─ ~/.openclaw or OPENCLAW_STATE_DIR
+// resolveOpenClawConfigPath()
+// └─ path to openclaw.json (env override supported)
+// resolveAntfarmRoot()
+// └─ ~/.openclaw/antfarm root
+// resolveWorkflowRoot() / resolveWorkflowDir(id)
+// └─ base and per-workflow install directories
+// resolveWorkflowWorkspaceRoot() / resolveWorkflowWorkspaceDir(id)
+// └─ base and per-workflow agent workspace directories
+// resolveRunRoot()
+// └─ directory for workflow run state
+// resolveAntfarmCli()
+// └─ absolute path to built CLI entry
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";

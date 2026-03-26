@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+// Responsibility: CLI entrypoint that routes all antfarm commands (install/uninstall, workflow run/status, step ops, dashboard, medic) and performs runtime Node/SQLite checks.
+// Exported interface (ASCII):
+// main() [implicit]
+// ├─ parses argv, dispatches subcommands
+// └─ invokes installer/run/medic/server modules
+
 // Runtime check: node:sqlite requires Node.js >= 22 (real Node, not Bun's wrapper)
 try {
   await import("node:sqlite");

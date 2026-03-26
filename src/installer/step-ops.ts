@@ -1,3 +1,17 @@
+// Responsibility: Orchestrate step lifecycle operations (peek/claim/complete/fail), parse agent outputs, manage stories/loops, and enforce timeouts/abandonment.
+// Exported interface (ASCII):
+// parseOutputKeyValues(output)
+// └─ parses KEY: value pairs (excludes STORIES_JSON)
+// peekStep(agentId)
+// └─ lightweight check for pending work
+// claimStep(agentId)
+// └─ claims next pending step and returns resolved input/context
+// completeStep(stepId, output, sessionKey?)
+// └─ marks step done, merges context, advances pipeline
+// failStep(stepId, error, sessionKey?)
+// └─ applies retry/on_fail logic and may advance or escalate
+// getStories(runId)
+// └─ returns stories for a run (feature-dev)
 import { getDb } from "../db.js";
 import type { LoopConfig, Story } from "./types.js";
 import fs from "node:fs";
@@ -13,6 +27,7 @@ import { getMaxRoleTimeoutSeconds } from "./install.js";
 import { loadWorkflowSpec } from "./workflow-spec.js";
 import { resolveWorkflowDir } from "./paths.js";
 import { isFrontendChange } from "../lib/frontend-detect.js";
+import { loadStandards } from "../lib/standards.js";
 import type { WorkflowStepFailure } from "./types.js";
 
 /**
@@ -28,7 +43,7 @@ export function parseOutputKeyValues(output: string): Record<string, string> {
   let pendingValue = "";
 
   function commitPending() {
-    if (pendingKey && !pendingKey.startsWith("STORIES_JSON")) {
+    if (pendingKey && !pendingKey.startsWith("STORIES_JSON") && pendingKey !== "CODING_STANDARDS") {
       result[pendingKey.toLowerCase()] = pendingValue.trim();
     }
     pendingKey = null;
@@ -531,6 +546,18 @@ export function claimStep(agentId: string): ClaimResult {
     context["has_frontend_changes"] = "false";
   }
 
+  // Inject coding standards from target repo (filtered by detected tech stack)
+  context["coding_standards"] = context["repo"]
+    ? loadStandards(context["tech_stack"] ?? "", context["repo"])
+    : "";
+  if (context["coding_standards"] === "" && context["repo"]) {
+    try {
+      if (fs.existsSync(path.join(context["repo"], "agent-os", "standards"))) {
+        logger.warn(`Standards directory exists but no standards matched — hasTechStack: ${!!context["tech_stack"]}`, { runId: step.run_id });
+      }
+    } catch { /* best-effort warning */ }
+  }
+
   // T6: Loop step claim logic
   if (step.type === "loop") {
     const loopConfig: LoopConfig | null = step.loop_config ? JSON.parse(step.loop_config) : null;
@@ -633,7 +660,9 @@ export function claimStep(agentId: string): ClaimResult {
       }
 
       // Persist story context vars to DB so verify_each steps can access them
-      db.prepare("UPDATE runs SET context = ?, updated_at = datetime('now') WHERE id = ?").run(JSON.stringify(context), step.run_id);
+      // Strip coding_standards to avoid bloating the runs.context column (recomputed each claim)
+      const { coding_standards: _, ...contextForDb } = context;
+      db.prepare("UPDATE runs SET context = ?, updated_at = datetime('now') WHERE id = ?").run(JSON.stringify(contextForDb), step.run_id);
 
       const resolvedInput = resolveTemplate(step.input_template, context);
       return { found: true, stepId: step.id, runId: step.run_id, resolvedInput };

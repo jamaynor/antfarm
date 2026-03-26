@@ -101,10 +101,11 @@ steps:
 
       Instructions:
       1. Explore the codebase — understand the stack, framework, dependencies
-      2. Run `npm audit` (or equivalent) if a package manager is present
-      3. Scan for hardcoded secrets: API keys, passwords, tokens, private keys in source
-      4. Check for .env files committed to the repo
-      5. Scan for common vulnerabilities:
+      2. Detect the project's tech stack (languages, frameworks, runtimes)
+      3. Run `npm audit` (or equivalent) if a package manager is present
+      4. Scan for hardcoded secrets: API keys, passwords, tokens, private keys in source
+      5. Check for .env files committed to the repo
+      6. Scan for common vulnerabilities:
          - SQL injection (raw queries, string concatenation in queries)
          - XSS (unescaped user input in templates/responses)
          - CSRF (missing CSRF tokens on state-changing endpoints)
@@ -115,14 +116,15 @@ steps:
          - Missing input validation on API endpoints
          - Insecure file permissions
          - Exposed environment variables
-      6. Review auth/session handling (token expiry, session fixation, cookie flags)
-      7. Check security headers (CORS, CSP, HSTS, X-Frame-Options)
-      8. Document every finding with severity, file, line, and description
+      7. Review auth/session handling (token expiry, session fixation, cookie flags)
+      8. Check security headers (CORS, CSP, HSTS, X-Frame-Options)
+      9. Document every finding with severity, file, line, and description
 
       Reply with:
       STATUS: done
       REPO: /path/to/repo
       BRANCH: security-audit-YYYY-MM-DD
+      TECH_STACK: comma-separated tags (e.g., typescript, react, node)
       VULNERABILITY_COUNT: <number>
       FINDINGS: <detailed list of each vulnerability>
     expects: "STATUS: done"
@@ -214,6 +216,9 @@ steps:
       BUILD_CMD: {{build_cmd}}
       TEST_CMD: {{test_cmd}}
 
+      CODING STANDARDS (follow these when writing code):
+      {{coding_standards}}
+
       CURRENT STORY:
       {{current_story}}
 
@@ -257,6 +262,9 @@ steps:
       TEST_CMD: {{test_cmd}}
       CHANGES: {{changes}}
       REGRESSION_TEST: {{regression_test}}
+
+      CODING STANDARDS (verify the code follows these):
+      {{coding_standards}}
 
       CURRENT STORY:
       {{current_story}}

@@ -1,3 +1,9 @@
+// Responsibility: Install a workflow bundle into OpenClaw (fetch workflow, provision agents/workspaces, wire OpenClaw config, apply timeouts/cron/session settings).
+// Exported interface (ASCII):
+// getMaxRoleTimeoutSeconds()
+// └─ returns largest per-role timeout (seconds)
+// installWorkflow({ workflowId })
+// └─ fetches workflow, provisions agents/files, updates OpenClaw config, writes metadata
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fetchWorkflow } from "./workflow-fetch.js";

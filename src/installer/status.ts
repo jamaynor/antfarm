@@ -1,3 +1,13 @@
+// Responsibility: Provide workflow run status lookup, run listing, and run cancellation utilities backed by SQLite.
+// Exported interface (ASCII):
+// RunInfo, StepInfo, WorkflowStatusResult, StopWorkflowResult (types)
+// getWorkflowStatus(query)
+// └─ fetches run + steps by run number/task substring/id
+// listRuns()
+// └─ returns all runs ordered by created_at
+// stopWorkflow(query)
+// ├─ marks run as cancelled/failed pending steps
+// └─ tears down crons if idle and emits run.failed
 import { getDb } from "../db.js";
 import { teardownWorkflowCronsIfIdle } from "./agent-cron.js";
 import { emitEvent } from "./events.js";

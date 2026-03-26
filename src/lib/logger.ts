@@ -1,3 +1,17 @@
+// Responsibility: Provide file-based workflow logging (format/write/rotate) and recent log retrieval helpers.
+// Exported interface (ASCII):
+// LogLevel (type)
+// formatEntry(entry)
+// └─ formats one log entry line
+// log(level, message, context?)
+// └─ appends a log line to workflow.log (non-throwing)
+// logger
+// ├─ info(msg, ctx?)
+// ├─ warn(msg, ctx?)
+// ├─ error(msg, ctx?)
+// └─ debug(msg, ctx?)
+// readRecentLogs(lines?)
+// └─ returns the last N log lines
 import fs from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";

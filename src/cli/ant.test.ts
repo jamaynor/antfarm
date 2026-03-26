@@ -1,3 +1,6 @@
+// Responsibility: Test the printAnt Easter egg output for ASCII art and quote diversity.
+// Exported interface (ASCII):
+// (none — test file)
 import { describe, it, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
 import { printAnt } from "./ant.js";

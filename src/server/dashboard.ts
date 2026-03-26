@@ -1,3 +1,7 @@
+// Responsibility: Run the dashboard HTTP server and expose API endpoints for workflows/runs/events/stories/medic plus static UI assets.
+// Exported interface (ASCII):
+// startDashboard(port?)
+// └─ starts HTTP server and routes API/static requests
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";

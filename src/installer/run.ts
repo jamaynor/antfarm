@@ -1,3 +1,7 @@
+// Responsibility: Create a workflow run (seed DB rows for runs/steps, set initial context, start crons) and emit run start event.
+// Exported interface (ASCII):
+// runWorkflow({ workflowId, taskTitle, notifyUrl? })
+// └─ creates run/step records, ensures crons, emits run.started, returns run metadata
 import crypto from "node:crypto";
 import { loadWorkflowSpec } from "./workflow-spec.js";
 import { resolveWorkflowDir } from "./paths.js";

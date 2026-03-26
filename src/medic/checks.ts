@@ -1,3 +1,16 @@
+// Responsibility: Define Medic health checks that inspect run/step/cron state and return actionable findings.
+// Exported interface (ASCII):
+// MedicSeverity, MedicActionType, MedicFinding (types)
+// checkStuckSteps()
+// └─ finds long-running steps likely abandoned
+// checkStalledRuns()
+// └─ finds running runs with no recent step progress
+// checkDeadRuns()
+// └─ finds zombie runs with only terminal steps left
+// checkOrphanedCrons(cronJobs)
+// └─ finds workflow crons with no active runs
+// runSyncChecks()
+// └─ runs all synchronous checks and returns aggregated findings
 /**
  * Medic health checks — modular functions that inspect DB state and return findings.
  */

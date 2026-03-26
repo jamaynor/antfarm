@@ -1,3 +1,7 @@
+// Responsibility: Provide the `antfarm ant` Easter egg (ASCII ant art + random quote).
+// Exported interface (ASCII):
+// printAnt()
+// └─ writes ASCII art and a random teamwork-themed quote to stdout
 /**
  * Easter egg: `antfarm ant` prints ASCII art and a random quote.
  */

@@ -1,3 +1,9 @@
+// Responsibility: Define the shared TypeScript contracts for workflow specs, runtime records, agent roles, and step/run results.
+// Exported interface (ASCII):
+// WorkflowAgentFiles, AgentRole, WorkflowAgent, PollingConfig
+// WorkflowStepFailure, LoopConfig, WorkflowStep, Story
+// WorkflowSpec, WorkflowInstallResult
+// StepResult, WorkflowRunRecord
 export type WorkflowAgentFiles = {
   baseDir: string;
   files: Record<string, string>;

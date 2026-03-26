@@ -1,3 +1,7 @@
+// Responsibility: Load and validate workflow.yml files, including agent definitions, step definitions, polling config, and loop config parsing.
+// Exported interface (ASCII):
+// loadWorkflowSpec(workflowDir)
+// └─ parses workflow.yml into WorkflowSpec and validates required constraints
 import fs from "node:fs/promises";
 import path from "node:path";
 import YAML from "yaml";

@@ -1,3 +1,6 @@
+// Responsibility: Validate logger formatting, sync/async behavior, and exported logger helper methods.
+// Exported interface (ASCII):
+// (none — test file)
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { log, logger, formatEntry, readRecentLogs } from "./logger.js";

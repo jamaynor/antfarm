@@ -1,3 +1,14 @@
+// Responsibility: Run Medic check cycles, apply safe remediations, persist check history, and expose Medic status/history queries.
+// Exported interface (ASCII):
+// ensureMedicTables()
+// └─ creates medic_checks table if missing
+// MedicCheckResult, MedicStatus (interfaces)
+// runMedicCheck()
+// └─ runs checks, remediates issues, stores summary/details
+// getMedicStatus()
+// └─ returns install state + last check + 24h aggregates
+// getRecentMedicChecks(limit?)
+// └─ returns recent Medic check records with parsed findings
 /**
  * Medic — the antfarm health watchdog.
  *

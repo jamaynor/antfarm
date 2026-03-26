@@ -1,3 +1,9 @@
+// Responsibility: Discover bundled workflows and copy a selected workflow into the installed workflows directory.
+// Exported interface (ASCII):
+// listBundledWorkflows()
+// └─ returns workflow IDs that contain workflow.yml
+// fetchWorkflow(workflowId)
+// └─ copies bundled workflow to install location and returns source/destination paths
 import fs from "node:fs/promises";
 import path from "node:path";
 import { resolveBundledWorkflowDir, resolveBundledWorkflowsDir, resolveWorkflowDir, resolveWorkflowRoot } from "./paths.js";

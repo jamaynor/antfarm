@@ -1,3 +1,17 @@
+// Responsibility: Build agent cron prompts and manage OpenClaw cron jobs for workflow agents (create/list/delete/ensure/teardown).
+// Exported interface (ASCII):
+// buildWorkPrompt(workflowId, agentId)
+// └─ returns execution prompt for claimed work
+// buildPollingPrompt(workflowId, agentId, workModel?)
+// └─ returns polling prompt for agents checking for work
+// setupAgentCrons(workflow)
+// └─ creates cron jobs for all agents in a workflow
+// removeAgentCrons(workflowId)
+// └─ deletes cron jobs for a workflow
+// ensureWorkflowCrons(workflow)
+// └─ idempotently recreates crons if missing
+// teardownWorkflowCronsIfIdle(workflowId)
+// └─ removes crons only when no runs are active
 import { createAgentCronJob, deleteAgentCronJobs, listCronJobs, checkCronToolAvailable } from "./gateway-api.js";
 import type { WorkflowSpec } from "./types.js";
 import { resolveAntfarmCli } from "./paths.js";

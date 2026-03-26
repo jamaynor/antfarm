@@ -1,3 +1,11 @@
+// Responsibility: Manage the SQLite database (open/refresh connection, run migrations, and expose helpers for run numbering and DB path).
+// Exported interface (ASCII):
+// getDb()
+// └─ returns DatabaseSync with migrations applied
+// nextRunNumber()
+// └─ reads max(run_number) and returns next value
+// getDbPath()
+// └─ returns absolute path to antfarm.db
 import { DatabaseSync } from "node:sqlite";
 import fs from "node:fs";
 import path from "node:path";

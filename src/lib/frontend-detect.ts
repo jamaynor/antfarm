@@ -1,3 +1,7 @@
+// Responsibility: Detect whether changed file paths indicate frontend/UI changes (excluding tests).
+// Exported interface (ASCII):
+// isFrontendChange(files)
+// └─ returns true when file extensions/directories match frontend patterns
 /**
  * Detects whether a set of changed files includes frontend-related changes.
  * Used by verify/review steps to conditionally add browser-based visual inspection.

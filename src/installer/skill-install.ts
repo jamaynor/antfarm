@@ -1,3 +1,9 @@
+// Responsibility: Install or remove the bundled antfarm-workflows skill into the user's OpenClaw skills directory.
+// Exported interface (ASCII):
+// installAntfarmSkill()
+// └─ copies bundled skill into ~/.openclaw/skills and reports install status/path
+// uninstallAntfarmSkill()
+// └─ removes antfarm-workflows from ~/.openclaw/skills
 import fs from "node:fs/promises";
 import path from "node:path";
 import os from "node:os";

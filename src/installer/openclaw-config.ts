@@ -1,3 +1,11 @@
+// Responsibility: Read and write the user's OpenClaw configuration file with JSON5 support.
+// Exported interface (ASCII):
+// OpenClawConfig (type)
+// └─ shape of openclaw.json fields Antfarm cares about
+// readOpenClawConfig()
+// └─ returns { path, config } parsed from openclaw.json
+// writeOpenClawConfig(path, config)
+// └─ serializes and writes config to disk
 import fs from "node:fs/promises";
 import JSON5 from "json5";
 import { resolveOpenClawConfigPath } from "./paths.js";

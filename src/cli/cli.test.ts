@@ -1,3 +1,6 @@
+// Responsibility: Validate CLI help and workflow stop command behavior in the built CLI binary.
+// Exported interface (ASCII):
+// (none — test file)
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { execSync, execFileSync } from "node:child_process";

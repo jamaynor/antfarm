@@ -91,14 +91,16 @@ steps:
       Instructions:
       1. Read the bug report carefully
       2. Explore the codebase to find the affected area
-      3. Attempt to reproduce: run tests, check for failing cases, read error logs/stack traces
-      4. Classify severity (critical/high/medium/low)
-      5. Document findings
+      3. Detect the project's tech stack (languages, frameworks, runtimes)
+      4. Attempt to reproduce: run tests, check for failing cases, read error logs/stack traces
+      5. Classify severity (critical/high/medium/low)
+      6. Document findings
 
       Reply with:
       STATUS: done
       REPO: /path/to/repo
       BRANCH: bugfix-branch-name
+      TECH_STACK: comma-separated tags (e.g., typescript, react, node)
       SEVERITY: critical|high|medium|low
       AFFECTED_AREA: what files/modules are affected
       REPRODUCTION: how to reproduce the bug
@@ -180,6 +182,9 @@ steps:
       FIX_APPROACH: {{fix_approach}}
       PROBLEM_STATEMENT: {{problem_statement}}
 
+      CODING STANDARDS (follow these when writing code):
+      {{coding_standards}}
+
       VERIFY FEEDBACK (if retrying):
       {{verify_feedback}}
 
@@ -215,6 +220,9 @@ steps:
       REGRESSION_TEST: {{regression_test}}
       ROOT_CAUSE: {{root_cause}}
       PROBLEM_STATEMENT: {{problem_statement}}
+
+      CODING STANDARDS (verify the code follows these):
+      {{coding_standards}}
 
       Instructions:
       1. Run the full test suite with {{test_cmd}}

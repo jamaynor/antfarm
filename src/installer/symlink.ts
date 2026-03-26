@@ -1,3 +1,9 @@
+// Responsibility: Manage the user-facing `antfarm` CLI symlink under ~/.local/bin.
+// Exported interface (ASCII):
+// ensureCliSymlink()
+// └─ creates or updates ~/.local/bin/antfarm symlink to dist/cli/cli.js
+// removeCliSymlink()
+// └─ removes ~/.local/bin/antfarm symlink during uninstall
 import { existsSync, mkdirSync, symlinkSync, unlinkSync, readlinkSync, lstatSync } from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";

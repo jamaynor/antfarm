@@ -1,3 +1,17 @@
+// Responsibility: Talk to the OpenClaw gateway (HTTP) with CLI fallback for cron/session operations used by Antfarm.
+// Exported interface (ASCII):
+// createAgentCronJob(job)
+// └─ creates a cron job via gateway (or CLI fallback)
+// checkCronToolAvailable()
+// └─ verifies gateway exposes cron tool
+// listCronJobs()
+// └─ lists cron jobs from gateway/CLI
+// deleteCronJob(jobId)
+// └─ deletes a specific cron job
+// deleteAgentCronJobs(namePrefix)
+// └─ deletes cron jobs with a given prefix
+// sendSessionMessage({ sessionKey, message })
+// └─ sends a message to an agent session via gateway
 import fs from "node:fs/promises";
 import path from "node:path";
 import os from "node:os";

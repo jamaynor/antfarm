@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+// Responsibility: Daemon process entrypoint that writes dashboard PID file, handles SIGTERM cleanup, and starts the dashboard server.
+// Exported interface (ASCII):
+// (none — executable entry script)
 import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
