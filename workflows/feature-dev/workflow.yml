@@ -93,6 +93,9 @@ steps:
       TASK:
       {{task}}
 
+      SPEC:
+      {{spec}}
+
       Instructions:
       1. Explore the codebase to understand the stack, conventions, and patterns
       2. Detect the project's tech stack (languages, frameworks, runtimes)
@@ -161,6 +164,9 @@ steps:
       TASK (overall):
       {{task}}
 
+      SPEC:
+      {{spec}}
+
       REPO: {{repo}}
       BRANCH: {{branch}}
       BUILD_CMD: {{build_cmd}}
@@ -210,6 +216,9 @@ steps:
 
       TASK (overall):
       {{task}}
+
+      SPEC:
+      {{spec}}
 
       REPO: {{repo}}
       BRANCH: {{branch}}
@@ -344,6 +353,9 @@ steps:
       PR: {{pr}}
       TASK: {{task}}
       CHANGES: {{changes}}
+
+      SPEC:
+      {{spec}}
 
       CODING STANDARDS (evaluate the PR against these):
       {{coding_standards}}

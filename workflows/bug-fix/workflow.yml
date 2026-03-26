@@ -88,6 +88,9 @@ steps:
       BUG REPORT:
       {{task}}
 
+      SPEC:
+      {{spec}}
+
       Instructions:
       1. Read the bug report carefully
       2. Explore the codebase to find the affected area
@@ -117,6 +120,9 @@ steps:
 
       BUG REPORT:
       {{task}}
+
+      SPEC:
+      {{spec}}
 
       REPO: {{repo}}
       SEVERITY: {{severity}}
@@ -173,6 +179,9 @@ steps:
       BUG REPORT:
       {{task}}
 
+      SPEC:
+      {{spec}}
+
       REPO: {{repo}}
       BRANCH: {{branch}}
       BUILD_CMD: {{build_cmd}}
@@ -212,6 +221,9 @@ steps:
 
       BUG REPORT:
       {{task}}
+
+      SPEC:
+      {{spec}}
 
       REPO: {{repo}}
       BRANCH: {{branch}}

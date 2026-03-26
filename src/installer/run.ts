@@ -1,6 +1,6 @@
 // Responsibility: Create a workflow run (seed DB rows for runs/steps, set initial context, start crons) and emit run start event.
 // Exported interface (ASCII):
-// runWorkflow({ workflowId, taskTitle, notifyUrl? })
+// runWorkflow({ workflowId, taskTitle, notifyUrl?, specPath? })
 // └─ creates run/step records, ensures crons, emits run.started, returns run metadata
 import crypto from "node:crypto";
 import { loadWorkflowSpec } from "./workflow-spec.js";
@@ -9,11 +9,13 @@ import { getDb, nextRunNumber } from "../db.js";
 import { logger } from "../lib/logger.js";
 import { ensureWorkflowCrons } from "./agent-cron.js";
 import { emitEvent } from "./events.js";
+import { loadSpec } from "../lib/spec-loader.js";
 
 export async function runWorkflow(params: {
   workflowId: string;
   taskTitle: string;
   notifyUrl?: string;
+  specPath?: string;
 }): Promise<{ id: string; runNumber: number; workflowId: string; task: string; status: string }> {
   const workflowDir = resolveWorkflowDir(params.workflowId);
   const workflow = await loadWorkflowSpec(workflowDir);
@@ -25,6 +27,7 @@ export async function runWorkflow(params: {
   const initialContext: Record<string, string> = {
     task: params.taskTitle,
     ...workflow.context,
+    spec: params.specPath ? loadSpec(params.specPath) : "",
   };
 
   db.exec("BEGIN");

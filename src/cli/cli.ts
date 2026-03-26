@@ -677,15 +677,26 @@ async function main() {
 
   if (action === "run") {
     let notifyUrl: string | undefined;
+    let specPath: string | undefined;
     const runArgs = args.slice(3);
-    const nuIdx = runArgs.indexOf("--notify-url");
-    if (nuIdx !== -1) {
-      notifyUrl = runArgs[nuIdx + 1];
-      runArgs.splice(nuIdx, 2);
+    // Parse known flags in any order; remaining tokens form taskTitle
+    for (const flag of ["--notify-url", "--spec"] as const) {
+      let idx = runArgs.indexOf(flag);
+      while (idx !== -1) {
+        const value = runArgs[idx + 1];
+        if (!value || value.startsWith("--")) {
+          process.stderr.write(`Missing value for ${flag}.\n`);
+          process.exit(1);
+        }
+        if (flag === "--notify-url") notifyUrl = value;
+        if (flag === "--spec") specPath = value;
+        runArgs.splice(idx, 2);
+        idx = runArgs.indexOf(flag); // handle repeated flags (last wins)
+      }
     }
     const taskTitle = runArgs.join(" ").trim();
     if (!taskTitle) { process.stderr.write("Missing task title.\n"); printUsage(); process.exit(1); }
-    const run = await runWorkflow({ workflowId: target, taskTitle, notifyUrl });
+    const run = await runWorkflow({ workflowId: target, taskTitle, notifyUrl, specPath });
     process.stdout.write(
       [`Run: #${run.runNumber} (${run.id})`, `Workflow: ${run.workflowId}`, `Task: ${run.task}`, `Status: ${run.status}`].join("\n") + "\n",
     );

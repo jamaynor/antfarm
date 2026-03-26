@@ -99,6 +99,9 @@ steps:
       TASK:
       {{task}}
 
+      SPEC:
+      {{spec}}
+
       Instructions:
       1. Explore the codebase — understand the stack, framework, dependencies
       2. Detect the project's tech stack (languages, frameworks, runtimes)
@@ -211,6 +214,9 @@ steps:
       TASK (overall):
       {{task}}
 
+      SPEC:
+      {{spec}}
+
       REPO: {{repo}}
       BRANCH: {{branch}}
       BUILD_CMD: {{build_cmd}}
@@ -256,6 +262,9 @@ steps:
     agent: verifier
     input: |
       Verify the security fix is correct and the vulnerability is patched.
+
+      SPEC:
+      {{spec}}
 
       REPO: {{repo}}
       BRANCH: {{branch}}
